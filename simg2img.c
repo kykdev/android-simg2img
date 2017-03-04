@@ -64,6 +64,8 @@ int main(int argc, char *argv[])
             }
         }
 
+        printf("Processing file '%s'...\n", argv[i]);
+
         s = sparse_file_import(in, true, false);
         if (!s) {
             fprintf(stderr, "Failed to read sparse file\n");
