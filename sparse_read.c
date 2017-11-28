@@ -36,7 +36,11 @@
 #include "sparse_file.h"
 #include "sparse_format.h"
 
-#if defined(__APPLE__) && defined(__MACH__)
+#if defined(__CYGWIN__)
+#define USE_MINGW
+#endif
+
+#if defined(__CYGWIN__) || (defined(__APPLE__) && defined(__MACH__))
 #define lseek64 lseek
 #define off64_t off_t
 #endif

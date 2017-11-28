@@ -34,6 +34,10 @@
 #include "sparse_crc32.h"
 #include "sparse_format.h"
 
+#if defined(__CYGWIN__)
+#define USE_MINGW
+#endif
+
 #ifndef USE_MINGW
 #include <sys/mman.h>
 #define O_BINARY 0
@@ -41,7 +45,7 @@
 #define ftruncate64 ftruncate
 #endif
 
-#if defined(__APPLE__) && defined(__MACH__)
+#if defined(__CYGWIN__) || (defined(__APPLE__) && defined(__MACH__))
 #define lseek64 lseek
 #define ftruncate64 ftruncate
 #define mmap64 mmap
