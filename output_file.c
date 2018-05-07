@@ -698,14 +698,18 @@ int write_fill_chunk(struct output_file *out, unsigned int len, uint32_t fill_va
 int write_fd_chunk(struct output_file *out, unsigned int len, int fd, int64_t offset)
 {
     int ret;
+#ifndef USE_MINGW
     int64_t aligned_offset;
     int aligned_diff;
     uint64_t buffer_size;
+#endif
     char *ptr;
 
+#ifndef USE_MINGW
     aligned_offset = offset & ~(sysconf(_SC_PAGESIZE) - 1);
     aligned_diff = offset - aligned_offset;
     buffer_size = (uint64_t)len + (uint64_t)aligned_diff;
+#endif
 
 #ifndef USE_MINGW
     if (buffer_size > SIZE_MAX)
